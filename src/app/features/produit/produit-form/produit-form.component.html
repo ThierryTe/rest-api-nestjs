@@ -1,0 +1,82 @@
+
+<div *ngIf="isLoadingResults" fxLayout="column" fxLayoutAlign="center center" class="produit-spinner">   
+    <mat-spinner color="primary"></mat-spinner>    
+</div> 
+    <form [formGroup]="formulaire" (ngSubmit)="onSubmit()" autocomplete="off">
+
+        <mat-card-header>
+            <mat-card-subtitle>
+                <h3>
+                    <span *ngIf="!produit.id">Création d'un produit </span>
+                    <span *ngIf="produit.id">Modification: [{{produit.nom}}]</span>
+                </h3>
+              <!--   <mat-error class="global-error-valiator" *ngIf="formErrors?.length>0">
+                    La saisie du champ "{{formErrors[0]}}" a été détectée comme erronée.
+                </mat-error> -->
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+        <div mat-dialog-content> 
+                    <div fxLayout="row wrap" class="mt-2">
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Catégorie</mat-label>
+                                <mat-select formControlName="categorie" required>
+                                    <mat-option *ngFor="let categorie of categories" [value]="categorie.id">
+                                        <span>{{categorie.nom}}</span>
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="formulaire.controls.categorie.errors?.required">La categorie est obligatoire</mat-error>
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-md="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Nom</mat-label>
+                                <input matInput placeholder="Nom du produut" formControlName="nom" required>
+                                <mat-error *ngIf="formulaire.controls.nom.errors?.required">Le nom est obligatoire</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-md="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Ancien prix</mat-label>
+                                <input matInput placeholder="Prix du produit" type=number formControlName="ancienPrix" required>
+                                <mat-error *ngIf="formulaire.controls.ancienPrix.errors?.required">Le prix est obligatoire</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-md="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Nouveau prix</mat-label>
+                                <input matInput placeholder="Prix promotionnel" type=number formControlName="nouveauPrix" required>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="100" fxFlex.gt-md="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Taille</mat-label>
+                                <input matInput placeholder="Taille du produit" formControlName="taille" required>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-md="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Description</mat-label>
+                                <textarea  matInput placeholder="Description du produit" formControlName="description" required> </textarea>
+                                <mat-error *ngIf="formulaire.controls.description.errors?.required">La description est obligatoire</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="40" fxLayoutAlign="center center">  
+                            <app-image-upload [base64]="formulaire.controls.images.value"
+                                            [fileSize]="20000"    
+                                            [acceptTypes]="'image/png, image/jpeg, image/jpg'"
+                                            (onFileChange)="fileChange($event)">
+                            </app-image-upload>  
+                        </div>
+                    </div>
+    </div>
+    <div mat-dialog-actions mat-dialog-actions fxLayout="row" fxLayout="row" [fxLayoutGap]="'20px'" fxLayoutAlign="end center" class="w-100">
+        <button mat-raised-button color="warn" type="button" (click)="resetForm()">Annuler</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!formulaire.valid">
+            <span *ngIf="!produit.id">Enregistrer</span><span *ngIf="produit.id">Mettre à jour</span>
+        </button> 
+</div>
+    </mat-card-content>
+    </form>

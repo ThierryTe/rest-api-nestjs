@@ -1,0 +1,67 @@
+
+<div class="px-3 py-5">
+    <div class="theme-container">  
+        <mat-card class="p-0 o-hidden">
+            <div fxLayout="row wrap"> 
+                <div fxFlex="100" fxFlex.gt-sm="50" class="p-0" [style.background-image]="bgImage" class="bg-cover"> 
+                </div> 
+                <div fxFlex="100" fxFlex.gt-sm="50" class="py-3" ngClass.gt-sm="px-5" ngClass.sm="px-3" ngClass.xs="px-3">  
+                    <div fxLayout="column" fxLayoutAlign="center center" class="text-center">  
+                        <h1 class="secondary-font">Inscription</h1>  
+                        <a mat-button routerLink="/login" color="accent" class="w-100">Avez vous déjà un compte? Connectez vous!</a>  
+                    </div>
+                    <form [formGroup]="formulaire" (ngSubmit)="onSubmit()">
+                        <div fxLayout="row wrap" class="mt-2">  
+                        <div fxFlex="100" fxFlex.gt-md="50" class="px-3">
+                        <mat-form-field  appearance="outline" class="w-100">
+                            <mat-icon matPrefix class="mr-1 text-muted">person</mat-icon>
+                            <mat-label>Nom d'utilisateur</mat-label>
+                            <input matInput placeholder="Username" formControlName="username" required>
+                            <mat-error *ngIf="formulaire.controls.username.errors?.required">Username is required</mat-error>
+                            <mat-error *ngIf="formulaire.controls.username.hasError('minlength')">Username isn't long enough, minimum of 6 characters</mat-error>
+                        </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-md="50" class="px-3">
+                        <mat-form-field  appearance="outline" class="w-100">
+                            <mat-icon matPrefix class="mr-1 text-muted">person</mat-icon>
+                            <mat-label>Nom </mat-label>
+                            <input matInput placeholder="Nom" formControlName="nom" required>
+                            <mat-error *ngIf="formulaire.controls.nom.errors?.required">Le nom est obligatoire</mat-error>
+                        </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-md="50" class="px-3">
+                        <mat-form-field  appearance="outline" class="w-100 ">
+                            <mat-icon matPrefix class="mr-1 text-muted">person</mat-icon>
+                            <mat-label>Prénom(s)</mat-label>
+                            <input matInput placeholder="Prénom(s)" formControlName="prenom" required>
+                            <mat-error *ngIf="formulaire.controls.prenom.errors?.required">le prénom est obligatoire</mat-error>
+                        </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-md="50" class="px-3">
+                        <mat-form-field  appearance="outline" class="w-100 mt-1">
+                            <mat-icon matPrefix class="mr-1 text-muted">lock</mat-icon>
+                            <mat-label>Mot de passe</mat-label>
+                            <input matInput placeholder="Mot de passe" formControlName="password" type="password" minlength="6" required [type]="hide ? 'password' : 'text'">
+                            <mat-error *ngIf="formulaire.controls.password.errors?.required">Password is required</mat-error>
+                            <mat-error *ngIf="formulaire.controls.password.hasError('minlength')">Password isn't long enough, minimum of 6 characters</mat-error>
+                            <button mat-icon-button matSuffix (click)="hide = !hide" type="button" class="text-muted">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                        </mat-form-field> 
+                        </div>
+                        </div>
+                        <div class="text-center"> 
+                            <button mat-raised-button color="accent" class="uppercase" type="submit">
+                                Créer un compte
+                            </button>
+                        </div> 
+                    </form>
+                    <div class="divider mt-4"></div> 
+                    <mat-card-actions fxLayoutAlign="center center" class="text-center">
+                        <small class="my-3">En cliquant sur le bouton "Créer un compte" vous êtes d'accord avec nos<a mat-button routerLink="/terms-conditions" color="primary" class="mx-2">Termes et conditions</a> </small>
+                    </mat-card-actions>
+                </div> 
+            </div> 
+        </mat-card>
+    </div>
+</div>   

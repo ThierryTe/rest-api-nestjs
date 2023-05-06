@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<div mat-dialog-content>
+    <p> {{data.message}}</p>
+</div>
+<div mat-dialog-actions mat-dialog-actions fxLayout="row" align="end">
+    <button type="button" mat-raised-button (click)="dialogRef.close(false)">{{data.button1}}</button>
+    <button type="button" mat-raised-button (click)="dialogRef.close(true)">{{data.button2}}</button>
+</div>

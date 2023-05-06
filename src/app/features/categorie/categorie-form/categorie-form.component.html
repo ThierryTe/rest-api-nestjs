@@ -1,0 +1,26 @@
+<div class="header">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+        <h2 class="fw-500 secondary-font"><span *ngIf="!categorie.id">Créer une catégorie</span><span *ngIf="categorie.id">Modifier: {{categorie.nom}}</span></h2>
+    </div>   
+</div>  
+<form [formGroup]="formulaire" (ngSubmit)="onSubmit()" autocomplete="off" class="pt-3">
+    <div mat-dialog-content>
+        <div fxLayout="row wrap">
+            <div fxFlex="100">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Nom</mat-label>
+                    <input matInput  placeholder="Entrer la catégorie" formControlName="nom" required/>
+                    <mat-error *ngIf="formulaire.controls.nom.errors?.required">Le nom est obligatoire</mat-error> 
+                </mat-form-field>
+            </div>  
+        </div>
+    </div>
+    <div mat-dialog-actions mat-dialog-actions fxLayout="row" align="end">
+            <button mat-raised-button color="warn" mat-button mat-dialog-close>Annuler</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!formulaire.valid">
+            <span *ngIf="!categorie.id">Enregistrer</span><span *ngIf="categorie.id">Mettre à jour</span>
+          </button>
+        
+    </div>
+</form> 
+ 

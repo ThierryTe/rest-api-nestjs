@@ -1,0 +1,10 @@
+
+<div id="app" class="app" [dir]="(settings.rtl) ? 'rtl' : 'ltr'" [ngClass]="[settings.theme, 'toolbar-'+settings.toolbar]" [class.fixed-header]="settings.fixedHeader" [class.horizontal-menu]="settings.menu == 'horizontal'"
+>
+    <router-outlet></router-outlet>
+  <!--   <div id="app-spinner" *ngIf="settings.loadingSpinner">
+        <mat-spinner color="primary"></mat-spinner>
+        <h4>Chargement...</h4>
+    </div> -->
+    <ng-progress [spinner]="true" [meteor]="false" color="primary"></ng-progress>
+</div>
